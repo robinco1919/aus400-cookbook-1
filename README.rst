@@ -43,6 +43,14 @@ Sample Notebooks
 
 `Cross Sections <https://nbviewer.jupyter.org/github/coecms/aus400-cookbook/blob/master/notebooks/CrossSection.ipynb>`_
 
+`Combined plots with matplotlib <https://nbviewer.org/github/robinco1919/aus400-cookbook-1/blob/master/notebooks/5_CombinedPlots.ipynb>`_
+
+`Calculating and plotting potential vorticity <https://nbviewer.org/github/robinco1919/aus400-cookbook-1/blob/master/notebooks/5_CombinedPlots.ipynb>`_
+
+`Radius-height cross sections of TC Debbie <https://nbviewer.org/github/robinco1919/aus400-cookbook-1/blob/master/notebooks/7_RadiusHeightSections.ipynb>`_
+
+`Animator - basic use <https://nbviewer.org/github/robinco1919/aus400-cookbook-1/blob/master/notebooks/7_RadiusHeightSections.ipynb>`_
+
 Using the Cookbook
 ------------------
 
