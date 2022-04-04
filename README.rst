@@ -49,7 +49,7 @@ Sample Notebooks
 
 `Radius-height cross sections of TC Debbie <https://nbviewer.org/github/robinco1919/aus400-cookbook-1/blob/master/notebooks/7_RadiusHeightSections.ipynb>`_
 
-`Animator - basic use <https://nbviewer.org/github/robinco1919/aus400-cookbook-1/blob/master/notebooks/7_RadiusHeightSections.ipynb>`_
+`Animator - basic use <https://nbviewer.org/github/robinco1919/aus400-cookbook-1/blob/master/notebooks/8_Animator.ipynb>`_
 
 Using the Cookbook
 ------------------
