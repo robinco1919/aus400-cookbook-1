@@ -148,6 +148,61 @@ def to_height(ds, levels):
     return vertical_interp(ds, height, levels)
 
 
+def to_isentropic(ds, levels):
+    """
+    Interpolate the data in ds to the supplied potential temperature/theta levels (isentropic coordinates)
+
+    Args:
+        da: Aus400 variable to regrid
+        target: Target levels to regrid to
+
+    Returns:
+        :obj:`xarray.DataArray` on the target levels
+    """
+
+    res = identify_resolution(ds)
+    sub = identify_subgrid(ds)
+
+    if sub != "t":
+        raise Exception(
+            f"Can't vertically regrid data on '{sub}' grid, regrid to 't' first"
+        )
+
+    theta = load_var(
+        resolution=res,
+        stream="mdl",
+        variable="theta",
+        time=slice(
+            pandas.offsets.Hour().rollback(ds["time"].values[0])
+            - pandas.offsets.Hour(),
+            pandas.offsets.Hour().rollback(ds["time"].values[-1])
+            + pandas.offsets.Hour(),
+        ),
+        ensemble=slice(ds["ensemble"].values[0], ds["ensemble"].values[-1]),
+    )
+
+    # may need to c.s. data if the input is also c.s.
+    if "distance" in ds.dims:
+        if ds["longitude"].size > 1:
+            x0, x1 = ds["longitude"].values[0], ds["longitude"].values[-1]
+        else:
+            # meridional slice, x0 = x1
+            x0, x1 = ds["longitude"].values, ds["longitude"].values
+        if ds["latitude"].size > 1:
+            y0, y1 = ds["latitude"].values[0], ds["latitude"].values[-1]
+        else:
+            # zonal slice, y0 = y1
+            y0, y1 = ds["latitude"].values, ds["latitude"].values
+        theta = cross_sec(pressure, x0, y0, x1, y1)
+
+    # Reindex pressure to input dataset
+    # This removes any problems which occur due to mismatched grids (sometimes latitude/longitude
+    # differs by very small numerical values between datasets)
+    theta = theta.reindex_like(ds, method='nearest')
+
+    return vertical_interp(ds, theta, levels)
+
+
 def match_slice(da, target):
     """
     Match da to the slicing of target

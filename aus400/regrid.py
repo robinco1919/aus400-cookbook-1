@@ -172,7 +172,7 @@ def to_barra(data: xarray.Dataset):
 
 def regrid_vector(data):
     """
-    Redrigs vector quantities like u/v defined on grid edges to the
+    Regrids vector quantities like u/v defined on grid edges to the
     scalar grid on gridpoint centres (same resolution as original)
 
     Currently cannot regrid cross-sections of vector quantities --
@@ -199,12 +199,7 @@ def regrid_vector(data):
         )
 
     # load the grid to reshape input data to
-
-    grid = load_var(
-        resolution=res,
-        stream="fx",
-        variable="lnd_mask",
-    )
+    grid = load_var(resolution=res, stream="fx", variable="lnd_mask")
 
     # cut lats/lons of grid to that of input
     grid = grid.sel(latitude=slice(data.latitude.min(), data.latitude.max()))
